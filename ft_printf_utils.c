@@ -6,7 +6,7 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:13:17 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/15 15:16:56 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/15 17:20:37 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,3 +33,5 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+
