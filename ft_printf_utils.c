@@ -6,19 +6,19 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:13:17 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/18 15:40:52 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:00:23 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		ft_putchar(char c)
+int	ft_putchar(char c)
 {
 	write(1, &c, 1);
 	return (1);
 }
 
-int		ft_putstr(char *s)
+int	ft_putstr(char *s)
 {
 	if (!s)
 		return (0);
@@ -36,7 +36,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int		ft_putnbr_base(long long int n, char *base)
+int	ft_putnbr_base(long long int n, char *base)
 {
 	char			c;
 	long long int	len;
@@ -59,9 +59,10 @@ int		ft_putnbr_base(long long int n, char *base)
 	}
 	return (len);
 }
-int		ft_putnbr(int nb)
+
+int	ft_putnbr(int nb)
 {
-	int len;
+	int	len;
 
 	len = (nb < 0);
 	if (nb < 0)

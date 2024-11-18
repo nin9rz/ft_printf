@@ -6,7 +6,7 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:03:49 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/18 15:12:15 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:03:25 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	traitement(char format, long long data, int len)
 	return (len);
 }
 
-int			ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
 	int		num;
 	int		i;
@@ -49,21 +49,10 @@ int			ft_printf(const char *format, ...)
 			if (format[i] == 's')
 				num += ft_putstr(va_arg(args, char *));
 			else
-				num = traitement(format[i],  va_arg(args, long long), num);
+				num = traitement(format[i], va_arg(args, long long), num);
 		}
 		i++;
 	}
 	va_end(args);
 	return (num);
-}
-
-int		main(int argc, char **argv)
-{
-	(void)argc;
-	ft_putnbr_base(atoi(argv[1]), "0123456789");
-	write(1, "\n", 1);
-	ft_putnbr_base(atoi(argv[1]), "0123456789abcdef");
-	write(1, "\n", 1);
-	ft_putnbr_base(atoi(argv[1]), "0123456789ABCDEF");
-	write(1, "\n", 1);
 }

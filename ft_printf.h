@@ -6,7 +6,7 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:05:35 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/18 15:09:28 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/18 16:01:50 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdarg.h>
 # include <stdlib.h>
 
-int		ft_printf(const char *, ...);
+int		ft_printf(const char *format, ...);
 
 /* Utils */
 
