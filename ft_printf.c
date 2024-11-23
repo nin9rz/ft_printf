@@ -6,28 +6,34 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:03:49 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/18 16:03:25 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/23 15:57:01 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	traitement(char format, long long data, int len)
+static int	traitement(char format, long long data)
 {
+	int	len;
+
+	len = 0;
 	if (format == '%')
 		len += ft_putchar('%');
-	if (format == 'c')
+	else if (format == 'c')
 		len += ft_putchar((int)data);
-	if (format == 'i' || format == 'd')
+	else if (format == 'i' || format == 'd')
 		len += ft_putnbr((int)data);
-	if (format == 'u')
+	else if (format == 'u')
 		len += ft_putnbr((unsigned int)data);
-	if (format == 'x')
+	else if (format == 'x')
 		len += ft_putnbr_base((unsigned long)data, "0123456789abcdef");
-	if (format == 'X')
+	else if (format == 'X')
 		len += ft_putnbr_base((unsigned long)data, "0123456789ABCDEF");
-	if (format == 'p')
-		len += ft_putnbr_base((unsigned long)data, "0123456789ABCDEF");
+	else if (format == 'p')
+	{
+		len += ft_putstr("0x");
+		len += ft_putnbr_base((unsigned long)data, "0123456789abcdef");
+	}
 	return (len);
 }
 
@@ -39,6 +45,7 @@ int	ft_printf(const char *format, ...)
 
 	va_start(args, format);
 	i = 0;
+	num = 0;
 	while (format[i])
 	{
 		if (format[i] != '%')
@@ -49,10 +56,18 @@ int	ft_printf(const char *format, ...)
 			if (format[i] == 's')
 				num += ft_putstr(va_arg(args, char *));
 			else
-				num = traitement(format[i], va_arg(args, long long), num);
+				num += traitement(format[i], va_arg(args, long long));
 		}
 		i++;
 	}
 	va_end(args);
 	return (num);
 }
+/*
+int	main(int ac, char **av)
+{
+	(void)ac;
+	ft_printf("%d\n", ft_printf("%x\n", atoi(av[1])));
+	return (0);
+}
+*/

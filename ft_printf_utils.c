@@ -6,7 +6,7 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:13:17 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/18 16:00:23 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/23 14:50:46 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@ int	ft_putchar(char c)
 	return (1);
 }
 
-int	ft_putstr(char *s)
+int	ft_putstr(char *str)
 {
-	if (!s)
-		return (0);
-	write(1, s, ft_strlen(s));
-	return (ft_strlen(s));
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	write(1, str, ft_strlen(str));
+	return ((int)ft_strlen(str));
 }
 
 size_t	ft_strlen(const char *s)
@@ -36,10 +39,10 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int	ft_putnbr_base(long long int n, char *base)
+int	ft_putnbr_base(unsigned int n, char *base)
 {
 	char			c;
-	long long int	len;
+	unsigned int	len;
 
 	len = ft_strlen(base);
 	if (n < 0)
@@ -48,19 +51,16 @@ int	ft_putnbr_base(long long int n, char *base)
 		n = -n;
 	}
 	if (n >= len)
+		return (ft_putnbr_base(n / len, base) + ft_putnbr_base(n % len, base));
+	else
 	{
-		ft_putnbr_base(n / len, base);
-		ft_putnbr_base(n % len, base);
-	}
-	if (n < len)
-	{
-		c = base[n % len];
+		c = base[n];
 		write(1, &c, 1);
+		return (1);
 	}
-	return (len);
 }
 
-int	ft_putnbr(int nb)
+int	ft_putnbr(long long nb)
 {
 	int	len;
 
