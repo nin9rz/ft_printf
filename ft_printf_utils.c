@@ -6,7 +6,7 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:13:17 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/23 14:50:46 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:02:39 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int	ft_putnbr_base(unsigned int n, char *base)
+int	putnbr_base(unsigned long n, char *base)
 {
 	char			c;
-	unsigned int	len;
+	unsigned long	len;
 
 	len = ft_strlen(base);
 	if (n < 0)
@@ -51,7 +51,7 @@ int	ft_putnbr_base(unsigned int n, char *base)
 		n = -n;
 	}
 	if (n >= len)
-		return (ft_putnbr_base(n / len, base) + ft_putnbr_base(n % len, base));
+		return (putnbr_base(n / len, base) + putnbr_base(n % len, base));
 	else
 	{
 		c = base[n];

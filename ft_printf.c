@@ -6,13 +6,26 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:03:49 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/23 15:57:01 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:03:20 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static int	traitement(char format, long long data)
+static int	ptrs(int len, va_list data)
+{
+	unsigned long	ptr = va_arg(data, unsigned long);
+	if (ptr == 0)
+		len += ft_putstr("(nil)");
+	else
+	{
+		len += ft_putstr("0x");
+		len += putnbr_base(ptr, "0123456789abcdef");
+	}
+	return (len);
+}
+
+static int	traitement(char format, va_list data)
 {
 	int	len;
 
@@ -20,20 +33,17 @@ static int	traitement(char format, long long data)
 	if (format == '%')
 		len += ft_putchar('%');
 	else if (format == 'c')
-		len += ft_putchar((int)data);
+		len += ft_putchar(va_arg(data, int));
 	else if (format == 'i' || format == 'd')
-		len += ft_putnbr((int)data);
+		len += ft_putnbr(va_arg(data, int));
 	else if (format == 'u')
-		len += ft_putnbr((unsigned int)data);
+		len += ft_putnbr(va_arg(data, unsigned int));
 	else if (format == 'x')
-		len += ft_putnbr_base((unsigned long)data, "0123456789abcdef");
+		len += putnbr_base(va_arg(data, unsigned int), "0123456789abcdef");
 	else if (format == 'X')
-		len += ft_putnbr_base((unsigned long)data, "0123456789ABCDEF");
+		len += putnbr_base(va_arg(data, unsigned int), "0123456789ABCDEF");
 	else if (format == 'p')
-	{
-		len += ft_putstr("0x");
-		len += ft_putnbr_base((unsigned long)data, "0123456789abcdef");
-	}
+		len += ptrs(len, data);
 	return (len);
 }
 
@@ -56,7 +66,7 @@ int	ft_printf(const char *format, ...)
 			if (format[i] == 's')
 				num += ft_putstr(va_arg(args, char *));
 			else
-				num += traitement(format[i], va_arg(args, long long));
+				num += traitement(format[i], args);
 		}
 		i++;
 	}
