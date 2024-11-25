@@ -6,7 +6,7 @@
 /*   By: jenibaud <jenibaud@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 15:03:49 by jenibaud          #+#    #+#             */
-/*   Updated: 2024/11/25 17:03:20 by jenibaud         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:17:44 by jenibaud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static int	ptrs(int len, va_list data)
 {
-	unsigned long	ptr = va_arg(data, unsigned long);
+	unsigned long	ptr;
+
+	ptr = va_arg(data, unsigned long);
 	if (ptr == 0)
 		len += ft_putstr("(nil)");
 	else
@@ -25,7 +27,7 @@ static int	ptrs(int len, va_list data)
 	return (len);
 }
 
-static int	traitement(char format, va_list data)
+static int	treatment(char format, va_list data)
 {
 	int	len;
 
@@ -53,6 +55,8 @@ int	ft_printf(const char *format, ...)
 	int		i;
 	va_list	args;
 
+	if (!format)
+		return (-1);
 	va_start(args, format);
 	i = 0;
 	num = 0;
@@ -66,18 +70,10 @@ int	ft_printf(const char *format, ...)
 			if (format[i] == 's')
 				num += ft_putstr(va_arg(args, char *));
 			else
-				num += traitement(format[i], args);
+				num += treatment(format[i], args);
 		}
 		i++;
 	}
 	va_end(args);
 	return (num);
 }
-/*
-int	main(int ac, char **av)
-{
-	(void)ac;
-	ft_printf("%d\n", ft_printf("%x\n", atoi(av[1])));
-	return (0);
-}
-*/
